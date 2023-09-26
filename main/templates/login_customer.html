@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #A6C2CE;
+        }
+        #login {
+            text-align: center;
+            justify-content: center;
+        }
+        #login_title {
+            color: forestgreen;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        #btn_login {
+            margin-top: 50px;
+            background-color: mediumseagreen;
+            width: 100px;
+            height: 50px;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        .text_input {
+            margin-bottom: 10px;
+            width: 400px;
+            height: 30px;
+            border-color: gray;
+            border-radius: 5px;
+        }
+        .text_lable {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #btn_back {
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        #username {
+            margin-top: 10px;
+        }
+        #password {
+            margin-top: 30px;
+        }
+        #error {
+            margin-top: 30px;
+            color: red;
+        }
+        .card_center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            margin: 0 auto;
+            height: 100vh;
+        }
+        .text1 {
+            margin-top: 15px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="login">
+    <button id="btn_back" type="submit" onclick="location.href=`{{url_for('hello')}}`">Back
+    </button>
+    <div class="d-flex justify-content-center card_center">
+        <div class="card mb-0">
+            <div class="card-body">
+                <form method="post">
+                <h1 id="login_title" >Log in</h1>
+
+                <label for="username" class="text_lable">Username:</label>
+                <input id="username" class="text_input" type="text" name="username" placeholder="Enter your username">
+                <br>
+                <label for="password" class="text_lable">Password:</label>
+                <input id="password" type="password" class="text_input" name="password"
+                       placeholder="Enter your password">
+                       
+                <p class="text1">
+                    Do not a Customer? <a href="{{ url_for('user.customer_register') }}">Register</a>
+                </p>
+
+                {% for message in get_flashed_messages() %}
+                    <p id="error">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+
+                <button id="btn_login" type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

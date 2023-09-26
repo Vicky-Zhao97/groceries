@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Register</title>
+    <style>
+        body {
+            background-color: #A6C2CE;
+        }
+        #register {
+            text-align: center;
+            justify-content: center;
+        }
+        #register_title {
+            color: forestgreen;
+            text-align: center !important;
+        }
+        .text_input {
+            margin-bottom: 10px;
+            width: 400px;
+            height: 30px;
+            border-color: gray;
+            border-radius: 5px;
+        }
+        .text_lable {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        #btn_back {
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        #error {
+            margin-top: 30px;
+            color: red;
+            text-align: center !important;
+        }
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+        .card-body {
+            text-align: left;
+        }
+
+        #btn_register {
+            width: 100px;
+            height: 30px;
+            background-color: forestgreen;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            text-align: center !important;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="register">
+    <button id="btn_back" type="submit" onclick="location.href=`{{url_for('hello')}}`">Back
+    </button>
+    <form method="post">
+    <div class="card_center">
+        <div class="card mb-0">
+            <div class="card-body">
+                <h1 id="register_title" >Manager Register</h1>
+
+                {% for message in get_flashed_messages() %}
+                    <p id="error">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+
+                <label for="employeeID" class="text_lable">Employee ID:</label>
+                <br>
+                <input id="employeeID" class="text_input" type="text" name="employeeID"
+                       placeholder="Enter your employeeID" required>
+                <br>
+                <label for="password" class="text_lable">Password:</label>
+                <br>
+                <input id="password" type="text" class="text_input" name="password"
+                       placeholder="Enter your password" required>
+                <br>
+
+                <label for="fullname" class="text_lable">Fullame:</label>
+                <br>
+                <input id="fullname" type="text" name="fullname" class="text_input"
+                       placeholder="Enter your fullname" required>
+                <br>
+
+                <label for="phone" class="text_lable">Phone:</label>
+                <br>
+                <input id="phone" type="text" name="phone" class="text_input"
+                       placeholder="Enter your phone" required>
+                <br>
+
+                <label for="email" class="text_lable">Email:</label>
+                <br>
+                <input id="email" type="text" name="email" class="text_input"
+                       placeholder="Enter your phone" required>
+                <br>
+
+                <label for="company" class="text_lable">Company:</label>
+                <br>
+                <input id="company" type="text" name="company" class="text_input"
+                       placeholder="Enter your company name" required>
+                <br>
+            </div>
+        </div>
+    </div>
+    <button id="btn_register" type="submit">Register</button>
+    </form> 
+</div>
+</body>
+</html>

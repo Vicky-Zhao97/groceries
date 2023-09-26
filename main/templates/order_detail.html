@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Detail</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #BDD1BB;
+        }
+        #order_detail {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #cart_title {
+            margin-top: 10px;
+            color: coral;
+            margin-bottom: 30px;
+        }
+
+        #error {
+            margin-top: 30px;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .card {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            color: coral;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #btn_back {
+            width: 100px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        #Total_price {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            color: whitesmoke;
+        }
+        #tax {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            color: whitesmoke;
+        }
+        #Order_date {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            color: whitesmoke;
+        }
+        #Order_status {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            color: coral;
+        }
+
+    </style>
+</head>
+<body>
+<div id="order_detail">
+    <button id="btn_back" onclick="location.href=`{{url_for('order.customer')}}`">Home
+    </button>
+    <h1 id="cart_title">
+        Order Detail
+    </h1>
+    <div class="d-flex justify-content-center">
+    <div class="card-list-container">
+        {% for product in products %}
+        <div class="card mb-0">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.product_name }}</h5>
+                <p class="card-text">Quantity: {{ product.quantity }}</p>
+                <p class="card-text">Price: ${{product.unit_price}}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+    <h5 id="Total_price">
+        Total price: ${{order.total_cost}}
+    </h5>
+    <h5 id="tax">
+        Tax: ${{order.tax_amount}}
+    </h5>
+    <h5 id="Order_date">
+        Order Time: {{ order.order_place_time }}
+    </h5>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

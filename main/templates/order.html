@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My order</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #BDD1BB;
+    }
+    #order_detail {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+    #cart_title {
+      margin-top: 10px;
+      color: #D38F50;
+      margin-bottom: 30px;
+    }
+
+    #error {
+      margin-top: 30px;
+      color: red;
+      margin-top: 10px;
+    }
+    .btn_select {
+      background-color: #9AB7B9 !important;
+      border: none;
+      margin-right: 5px;
+    }
+    .btn_delete {
+      border: none;
+      margin-left: 5px ;
+    }
+
+    .card {
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+      color: #D38F50;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+    #btn_back {
+      width: 100px;
+      position: absolute;
+      top: 3px;
+      left: 10px;
+      background-color: cadetblue;
+      color: #FFF;
+      border: none;
+      border-radius: 5px;
+    }
+
+  </style>
+</head>
+<body>
+<div id="order_detail">
+  <button id="btn_back" onclick="location.href=`{{url_for('user.home')}}`">Home
+  </button>
+  <h1 id="cart_title">
+    My Orders
+  </h1>
+
+  {% for message in get_flashed_messages() %}
+  <p id="error">
+      {{ message }}
+  </p>
+  {% endfor %}
+
+  <div class="d-flex justify-content-center">
+    <div class="card-list-container">
+      {% for order in orders %}
+      <div class="card mb-0">
+        <div class="card-body">
+          <h5 class="card-title">Order ID: {{order.order_id}}</h5>
+          <p class="card-text">Total Price: $ {{order.total_cost}}</p>
+          <p class="card-text">Tax: $ {{order.tax_amount}}</p>
+          <p class="card-text">Time: {{order.order_place_time}}</p>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary btn_select" onclick="location.href=`{{url_for('order.detail', order_id=order.order_id)}}`">Detail</button>
+            <button class="btn btn-danger btn_delete" onclick="location.href=`{{url_for('order.delete', customer=order.customer, order_id=order.order_id)}}`">Delete</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

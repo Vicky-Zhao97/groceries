@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #BDD1BB;
+    }
+    #product {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+    #product_title {
+      margin-top: 10px;
+        color: cadetblue;
+      margin-bottom: 30px;
+    }
+
+    #error {
+      margin-top: 30px;
+      color: red;
+      margin-top: 10px;
+    }
+
+
+    #btn_back {
+      width: 100px;
+      position: absolute;
+      top: 3px;
+      left: 10px;
+      background-color: cadetblue;
+      color: #FFF;
+      border: none;
+      border-radius: 5px;
+    }
+    .text_pruoduct {
+       color: cadetblue;
+        margin-bottom: 10px;
+    }
+    .card {
+        margin: auto;
+        width: 500px;
+        background-color: #D9D9D9;
+    }
+
+    .card-body {
+        text-align: left;
+    }
+
+    #btn_add {
+        margin-top: 30px;
+        width: 100px;
+        background-color: #D38F50;
+        color: #FFF;
+        border: none;
+        border-radius: 5px;
+    }
+
+  </style>
+</head>
+<body>
+<div id="product">
+  <button id="btn_back" onclick="location.href=`{{url_for('user.home')}}`">Home
+  </button>
+  <h1 id="product_title">
+    {{ product.product_name }}
+  </h1>
+    {% for message in get_flashed_messages() %}
+    <p id="error">
+        {{ message }}
+    </p>
+  {% endfor %}
+
+    <div class="d-flex justify-content-center">
+        <div class="card mb-0">
+            <div class="card-body">
+                <h5 id="product_name">
+                    Product Name:
+                </h5>
+                <p id="name" class="text_pruoduct">{{ product.product_name }}</p>
+                <h5 id="product_genre">
+                    Product Genre:
+                </h5>
+                <p id="genre" class="text_pruoduct">{{ product.genre }}</p>
+                <h5 id="product_description">
+                    Product Description:
+                </h5>
+                <p id="description" class="text_pruoduct">{{ product.product_description }}</p>
+                <h5 id="current_price">
+                    Current_Price:
+                </h5>
+                <p id="price" class="text_pruoduct"> ${{ product.current_price }}</p>
+                <h5 id="origin_country">
+                    Origin Country:
+                </h5>
+                <p id="country" class="text_pruoduct">{{ product.country_of_origin }}</p>
+                <h5 id="origin_country">
+                  Supplier:
+                </h5>
+                <a href="{{ url_for('supplier.home', company=product.company) }}" id="company" class="text_pruoduct">{{ product.company }}</a>
+            </div>
+        </div>
+    </div>
+    <button type="submit", id="btn_add" onclick="location.href=`{{ url_for('order.addCart', product_id=product.product_id) }}`">Add to Cart</button>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

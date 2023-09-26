@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>        
+        {% if edit %}
+            Edit
+        {% else %}
+            Add
+        {% endif %} Product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #BDD1BB;
+        }
+        #editProduct {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #editProduct_title {
+            margin-top: 10px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        #error {
+            margin-top: 30px;
+            color: red;
+            margin-top: 10px;
+        }
+
+
+        #btn_back {
+            width: 100px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        .text_product {
+            margin-bottom: 10px;
+            width: 400px;
+            background-color: cadetblue;
+            color: #FFF;
+            border-color: white;
+            border-radius: 5px;
+        }
+        .text_area {
+            height: 100px;
+        }
+        .card {
+            margin: auto;
+            width: 500px;
+            background-color: #BDD1BB;
+        }
+        .text_ID {
+            margin-bottom: 10px;
+            width: 400px;
+        }
+
+        .card-body {
+            text-align: left;
+        }
+
+        #btn_edit {
+            width: 100px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .labels {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="editProduct">
+    <button id="btn_back" onclick="location.href=`{{url_for('supplier.home', company=g.manager['company'], check=1)}}`" >Back
+    </button>
+    <h1 id="editProduct_title">
+        {% if add %}
+            Add
+        {% else %}
+            Edit
+        {% endif %}
+        Product
+    </h1>
+
+    {% for message in get_flashed_messages() %}
+        <p id="error">
+            {{ message }}
+        </p>
+    {% endfor %}
+
+    <form method="post">
+    <div class="d-flex justify-content-center">
+        <div class="card mb-0">
+            <div class="card-body">
+                {% if add == False %}
+                <p id="product_id" class="labels">
+                    ID: {{ product.product_id }}
+                </p>
+
+                {% endif %}
+
+                <label for="product_name" class="labels">
+                    Product Name:
+                </label>
+                <br>
+                <input id="product_name" type="text" class="text_product" name="name" required
+                       value={{ product.product_name }}>
+                <br>
+
+                <label class="labels">
+                    Description:
+                </label>
+                <br>
+                <textarea id="product_description" class="text_product text_area" name="desc">{{ product.product_description }}</textarea>
+                <br>
+
+
+                <label for="product_price" class="labels">
+                    Current Price:
+                </label>
+                <br>
+                <input id="product_price" type="number" step="any" min="0" class="text_product" name="price" required
+                    value={{ product.current_price }}>
+                <br>
+
+                <label for="product_genre" class="labels">
+                    Genre:
+                </label>
+                <br>
+                {% if add %}
+                    <input id="product_genre" type="text" class="text_product" name="genre" required>
+                    <br>
+                {% else %}
+                    <p>{{ product.genre }}</p>
+                {% endif %}
+
+                <label for="product_origin" class="labels">
+                    Country of Origin:
+                </label>
+                <br>
+                <input id="product_origin" class="text_product" type="text" name="origin" required
+                    value={{ product.country_of_origin }}>
+                <br>
+
+            </div>
+        </div>
+    </div>
+    <button id="btn_edit" type="submit">Save</button>
+    </form>
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

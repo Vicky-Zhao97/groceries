@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Profile</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #BDD1BB;
+    }
+    #profile {
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+    #profile_title {
+      margin-top: 10px;
+      color: cadetblue;
+      margin-bottom: 30px;
+    }
+
+    #error {
+      margin-top: 30px;
+      color: red;
+      margin-top: 10px;
+    }
+
+
+    #btn_back {
+      width: 150px;
+      position: absolute;
+      top: 3px;
+      left: 10px;
+      background-color: cadetblue;
+      color: #FFF;
+      border: none;
+      border-radius: 5px;
+    }
+    .text_user {
+      margin-bottom: 10px;
+      width: 400px;
+      background-color: cadetblue;
+      color: #FFF;
+      border-color: white;
+      border-radius: 5px;
+    }
+    .text_area {
+      height: 100px;
+    }
+    .card {
+      margin: auto;
+      width: 500px;
+      background-color: #BDD1BB;
+    }
+    .text_username {
+      margin-bottom: 10px;
+      width: 400px;
+    }
+
+    .card-body {
+      text-align: left;
+    }
+
+    #btn_edit {
+      width: 100px;
+      background-color: cadetblue;
+      color: #FFF;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+    }
+    .labels {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+
+  </style>
+</head>
+<body>
+<div id="profile">
+  <button id="btn_back" onclick="location.href=`/user/customer_login`">Customer Home
+  </button>
+  <h1 id="profile_title">
+    Customer Profile
+  </h1>
+  {% for message in get_flashed_messages() %}
+  <p id="error">
+      {{ message }}
+  </p>
+  {% endfor %}
+
+  <form method="post">
+  <div class="d-flex justify-content-center">
+    <div class="card mb-0">
+      <div class="card-body">
+        <p id="customer_username" class="labels">
+          Username:
+        </p>
+        <p id="Username" class="text_username">{{g.customer['username']}}</p>
+
+        <label for="name" class="labels">
+          fullname:
+        </label>
+        <br>
+        <input id="name" type="text" class="text_user" value={{g.customer['fullname']}} name="fullname" required>
+        <br>
+
+        <label for="password" class="labels">Password:</label>
+        <br>
+        <input id="password" type="text" name="password" class="text_user"
+               placeholder="Enter your password" value={{g.customer['pswd']}} name="password" required>
+        <br>
+
+        <label for="phone" class="labels">
+          Phone:
+        </label>
+        <br>
+        <input id="phone" type="tel" class="text_user" value={{g.customer['phone']}} name="phone" required>
+        <br>
+
+        <label for="email" class="labels">
+          Email:
+        </label>
+        <br>
+        <input id="email" class="text_user" type="email" value={{g.customer['email']}} name="email" required>
+        <br>
+
+        <label class="labels" for="edit_address">
+          Address:
+        </label>
+        <br>
+        <textarea id="edit_address" class="text_user text_area" name="address" required>{{g.customer['shipping_address']}}</textarea>
+        <br>
+
+      </div>
+    </div>
+  </div>
+  <button id="btn_edit" type="submit">Save</button>
+</form>
+
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

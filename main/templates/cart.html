@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My cart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #BDD1BB;
+        }
+        #myCart {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #cart_title {
+            margin-top: 10px;
+            color: #D38F50;
+            margin-bottom: 30px;
+        }
+
+        #error {
+            margin-top: 30px;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .card {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            color: #A17453;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Total_price {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            color: #A17453;
+        }
+        #tax {
+            margin-top: 15px;
+            margin-bottom: 30px;
+            color: #A17453;
+        }
+
+        #btn_order {
+            width: 100px;
+            background-color: coral;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        #btn_back {
+            width: 100px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        .product_name {
+            font-size: 23px !important;
+            font-weight: bold;
+        }
+        #number_input {
+            width: 100px;
+        }
+        .price {
+            text-align: right !important;
+        }
+
+    </style>
+    <script>
+        function updateCart(quantity, product_id) {
+            return location.href=`/order/updateCart/${product_id}/${quantity}`
+        }
+    </script>
+</head>
+<body>
+<div id="myCart">
+    <button id="btn_back" onclick="location.href=`{{url_for('user.home')}}`">Home
+    </button>
+    <h1 id="cart_title">
+        My Cart
+    </h1>
+
+    {% for message in get_flashed_messages() %}
+    <p id="error">
+        {{ message }}
+    </p>
+    {% endfor %}
+
+    <div class="d-flex justify-content-center">
+        <div class="card-list-container">
+            {% for product in products %}
+            <div class="card mb-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p class="product_name"> {{ product.product_name }} </p>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="number_input"
+                                   name="number_input" min="1" max="1000"
+                                   onchange="updateCart(this.value, `{{product.product_id}}`)"
+                                   onkeyup="updateCart(this.value, `{{product.product_id}}`)"
+                                   required value={{ product.quantity }}>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="price">Price: $ {{ product.unit_price }}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-danger" 
+                        onclick="location.href=`{{url_for('order.deleteCartProduct', product_id=product.product_id)}}`" >delete</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <h5 id="Total_price">
+        Total price: $ {{order.total_cost or 0}}
+    </h5>
+    <h5 id="tax">
+        Tax: $ {{order.tax_amount or 0}}
+    </h5>
+    <!-- <p id="error">Error message:</p> -->
+    {% if products %}
+    <button id="btn_order" onclick="location.href=`{{url_for('order.placeOrder')}}`">Place Order
+    </button>
+    {% endif %}
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

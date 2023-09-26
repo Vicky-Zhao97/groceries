@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #BDD1BB;
+        }
+        .button_top{
+            display: inline-block;
+            margin-left: 10px;
+            padding: 10px 20px;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        #btn_me {
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: #9AB7B9;
+        }
+
+        #btn_order {
+            width: 120px;
+            background-color: #FFD68E;
+            top: 3px;
+            right: 230px;
+            position: absolute;
+            color: #A17453;
+        }
+
+        #btn_cart {
+            width: 100px;
+            background-color: #D38F50;
+            top: 3px;
+            right: 120px;
+            position: absolute;
+        }
+
+        #btn_logout {
+            width: 100px;
+            background-color: forestgreen;
+            top: 3px;
+            right: 10px;
+            position: absolute;
+        }
+
+        #home {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #searchbox1 {
+            margin-top: 65px;
+            border-radius: 20px;
+            border: none;
+            color: #A17453;
+        }
+        #searchbox2 {
+            margin-top: 10px;
+            border-radius: 20px;
+            border: none;
+            padding-left: 20px;
+            color: #A17453;
+        }
+        #searchbox3 {
+            margin-top: 10px;
+            border-radius: 20px;
+            border: none;
+            color: #A17453;
+        }
+        .btn_search {
+            margin-top: 10px;
+            background-color: #A17453 !important;
+            color: #FFF;
+            border: #A17453;
+        }
+        #genre {
+            margin-top: 30px;
+            width: 600px;
+            background-color: #9AB7B9;
+            border-color: #9AB7B9;
+            color: white;
+        }
+        #supplier {
+            margin-top: 30px;
+            width: 600px;
+            margin-bottom: 30px;
+            background-color: #9AB7B9;
+            border-color: #9AB7B9;
+            color: white;
+        }
+        #error {
+            margin-top: 30px;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .card {
+            width: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            background-color: #D9D9D9;
+            color: #A17453;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn_select {
+            background-color: #9AB7B9 !important;
+            border: none;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="button_container">
+    <button id="btn_me" class="button_top" onclick="location.href=`{{url_for('user.customer_edit')}}`">
+        {{ g.customer['username'] }}</button>
+    <button id="btn_cart" class="button_top" onclick="location.href=`{{url_for('order.cart')}}`">My Cart
+    </button>
+    <button id="btn_order" class="button_top" onclick="location.href=`{{url_for('order.customer')}}`">My Orders
+    </button>
+    <button id="btn_logout" class="button_top" onclick="location.href=`{{url_for('user.customer_logout')}}`">Log Out
+    </button>
+</div>
+
+{% for message in get_flashed_messages() %}
+<p id="error">
+    {{ message }}
+</p>
+{% endfor %}
+
+<div id="home">
+    <form action="{{ url_for('user.home') }}">
+        <div class="container">
+            <div class="row justify-content-start">
+                <div class="col-1">
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" id="searchbox1" name="product" placeholder="Search Product..." value={{request.args.get('product', '')}}>
+                </div>
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-9">
+                    <input type="text" class="form-control" id="searchbox2" name="genre" placeholder="Search Genre..." value={{request.args.get('genre', '')}}>
+                </div>
+                <div class="col-1">
+                    <button type="submit", id="btn_search2" class="btn btn-primary
+                    btn_search">Search</button>
+                </div>
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-1">
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" id="searchbox3" name="supplier"
+                           placeholder="Search Supplier..." value={{request.args.get('supplier', '')}}>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card-list-container">
+            {% for product in products %}
+            <div class="card mb-0">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.product_name }}</h5>
+                    <p class="card-text">current price: {{ product.current_price }}</p>
+                    <p class="card-text">genre: {{ product.genre }}</p>
+                    <p class="card-text">country of origin: {{ product.country_of_origin }}</p>
+                    <button class="btn btn-primary btn_select" onclick="location.href=`{{url_for('product.detail', product_id=product.product_id)}}`">Select</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

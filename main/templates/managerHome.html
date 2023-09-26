@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #BDD1BB;
+        }
+        #manager {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #manager_title {
+            margin-top: 60px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        #btn_logout {
+            width: 100px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #error {
+            margin-top: 30px;
+            color: red;
+            margin-top: 10px;
+        }
+
+        .text_user {
+            margin-bottom: 10px;
+        }
+        .card {
+            margin: auto;
+            width: 500px;
+            background-color: #BDD1BB;
+        }
+
+        .card-body {
+            text-align: left;
+        }
+
+
+        #btn_edit {
+            width: 150px;
+            background-color: #D38F50;
+            top: 3px;
+            right: 180px;
+            position: absolute;
+        }
+
+        #btn_supplier {
+            width: 150px;
+            background-color: forestgreen;
+            top: 3px;
+            right: 10px;
+            position: absolute;
+        }
+        .button_top{
+            display: inline-block;
+            margin-left: 10px;
+            padding: 10px 20px;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="manager">
+    <div class="button_container">
+        <button id="btn_edit" class="button_top" onclick="location.href=`{{url_for('user.manager_edit')}}`">Edit Profile</button>
+        <button id="btn_supplier" class="button_top" onclick="location.href=`{{url_for('supplier.home', company=g.manager['company'], check=1)}}`">Go to Supplier</button>
+        <button id="btn_logout" class="button_top" onclick="location.href=`{{url_for('user.manager_logout')}}`">Log Out</button>
+    </div>
+
+
+    <h1 id="manager_title">
+        Manager
+    </h1>
+    {% for message in get_flashed_messages() %}
+        <p id="error">
+            {{ message }}
+        </p>
+    {% endfor %}
+    <div class="d-flex justify-content-center">
+        <div class="card mb-0">
+            <div class="card-body">
+                <h5 id="manger_id">
+                    Employee ID:
+                </h5>
+                <p id="ID" class="text_user">{{g.manager['employee_id']}}</p>
+
+                <h5 id="manager_name">
+                    Name:
+                </h5>
+                <p id="name" class="text_user">{{g.manager['fullname']}}</p>
+
+                <h5 id="manger_company">
+                    Supplier:
+                </h5>
+                <p id="company" class="text_user">{{g.manager['company']}}</p>
+
+                <h5 id="manger_phone">
+                    Phone:
+                </h5>
+                <p id="phone" class="text_user">{{g.manager['phone']}}</p>
+
+                <h5 id="manager_email">
+                    Email:
+                </h5>
+                <p id="email" class="text_user">{{g.manager['email']}}</p>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

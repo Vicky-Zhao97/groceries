@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Register</title>
+    <style>
+        body {
+            background-color: #A6C2CE;
+        }
+        #register {
+            text-align: center;
+            justify-content: center;
+        }
+        #register_title {
+            color: forestgreen;
+            text-align: center !important;
+        }
+        .text_input {
+            margin-bottom: 10px;
+            width: 400px;
+            height: 30px;
+            border-color: gray;
+            border-radius: 5px;
+        }
+        .text_lable {
+            font-size: 15px;
+            font-weight: bold;
+        }
+        #btn_back {
+            width: 100px;
+            height: 30px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        #error {
+            margin-top: 30px;
+            color: red;
+            text-align: center !important;
+        }
+        .card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+        .card-body {
+            text-align: left;
+            justify-content: space-between;
+        }
+        .text_area {
+            margin-bottom: 10px;
+            width: 400px;
+            border-radius: 5px;
+            height: 50px;
+        }
+        #btn_register {
+            width: 100px;
+            height: 30px;
+            background-color: forestgreen;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            text-align: center !important;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="register">
+    <button id="btn_back" type="submit" onclick="location.href=`{{url_for('hello')}}`">Back
+    </button>
+    <form method="post">
+    <div class="card_center">
+        <div class="card mb-0">
+            <div class="card-body">
+                <h1 id="register_title" >Customer Register</h1>
+
+                {% for message in get_flashed_messages() %}
+                    <p id="error">
+                        {{ message }}
+                    </p>
+                {% endfor %}
+
+                <label for="username" class="text_lable">Username:</label>
+                <br>
+                <input id="username" class="text_input" type="text" name="username" placeholder="Enter your username" required>
+                <br>
+                <label for="password" class="text_lable">Password:</label>
+                <br>
+                <input id="password" type="text" class="text_input" name="password"
+                       placeholder="Enter your password" required>
+                <br>
+
+                <label for="fullname" class="text_lable">Fullname:</label>
+                <br>
+                <input id="fullname" type="text" name="fullname" class="text_input"
+                       placeholder="Enter your fullname" required>
+                <br>
+
+                <label for="phone" class="text_lable">Phone:</label>
+                <br>
+                <input id="phone" type="tel" name="phone" class="text_input"
+                       placeholder="Enter your phone" required>
+                <br>
+
+                <label for="email" class="text_lable">Email:</label>
+                <br>
+                <input id="email" type="email" name="email" class="text_input"
+                       placeholder="Enter your phone" required>
+                <br>
+
+                <label for="address" class="text_lable">Address:</label>
+                <br>
+                <textarea id="address" class="text_area" name="address"
+                          placeholder="Enter your address" required></textarea>
+            </div>
+        </div>
+    </div>
+    <button id="btn_register" type="submit" >Register</button>
+</form>
+</div>
+</body>
+</html>

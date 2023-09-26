@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Supplier</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #BDD1BB;
+        }
+        #profile {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        #profile_title {
+            margin-top: 10px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        #error {
+            margin-top: 30px;
+            color: red;
+            margin-top: 10px;
+        }
+
+
+        #btn_back {
+            width: 150px;
+            position: absolute;
+            top: 3px;
+            left: 10px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+        }
+        .text_user {
+            margin-bottom: 10px;
+            width: 400px;
+            background-color: cadetblue;
+            color: #FFF;
+            border-color: white;
+            border-radius: 5px;
+        }
+        .text_area {
+            height: 100px;
+        }
+        .card {
+            margin: auto;
+            width: 500px;
+            background-color: #BDD1BB;
+        }
+        .text_username {
+            margin-bottom: 10px;
+            width: 400px;
+        }
+
+        .card-body {
+            text-align: left;
+        }
+
+        #btn_edit {
+            width: 100px;
+            background-color: cadetblue;
+            color: #FFF;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .labels {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="profile">
+    <button id="btn_back" onclick="location.href=`{{url_for('supplier.home', company=supplier.company_name, check=1)}}`">Back
+    </button>
+    <h1 id="profile_title">
+        Edit Supplier Profile
+    </h1>
+
+    {% for message in get_flashed_messages() %}
+        <p id="error">
+            {{ message }}
+        </p>
+    {% endfor %}
+
+    <form method="post">
+        <div class="d-flex justify-content-center">
+            <div class="card mb-0">
+                <div class="card-body">
+                    <p id="supplier_name" class="labels">
+                        Supplier Name:
+                    </p>
+                    <p id="name" class="text_username">{{ supplier.company_name }}</p>
+
+                    <label for="phone" class="labels">
+                        Contact Phone:
+                    </label>
+                    <br>
+                    <input id="phone" type="tel" class="text_user" placeholder="Enter the contact phone" 
+                    name="phone" required value={{ supplier.contact_phone }}>
+                    <br>
+
+                    <label class="labels" for="edit_address">
+                        Supplier Address:
+                    </label>
+                    <br>
+                    <textarea id="edit_address" class="text_user text_area" name="address" >{{ supplier.address }}</textarea>
+
+                </div>
+            </div>
+        </div>
+        <button id="btn_edit" type="submit">Save</button>
+    </form>
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
