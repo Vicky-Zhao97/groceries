@@ -24,6 +24,9 @@ MYSQL_USER = 'yourdbusername'
 MYSQL_PASSWORD = 'yourdbpassword'
 MYSQL_DATABSE = 'grocerydb'
 
+##demo link
+https://drive.google.com/file/d/1SGely3td-Xcb2ZKuaFNtMKVL9sZSgtup/view?usp=share_link
+
 ```
 
 ### Run application
